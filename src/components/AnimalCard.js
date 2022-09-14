@@ -1,6 +1,10 @@
 import Axios from 'axios';
 import React, { useState } from 'react';
 
+const currentURL = window.location.href.split('/');
+const ifAdminPage = currentURL.includes('admin');
+const readOnly = ifAdminPage;
+
 function AnimalCard(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [draftName, setDraftName] = useState('');
@@ -67,7 +71,7 @@ function AnimalCard(props) {
           <>
             <h4>{props.name}</h4>
             <p className="text-muted small">{props.species}</p>
-            {!props.readOnly && (
+            {readOnly && (
               <>
                 <button
                   onClick={() => {

@@ -1,6 +1,10 @@
 import Axios from 'axios';
 import React, { useState, useRef } from 'react';
 
+const currentURL = window.location.href.split('/');
+const ifAdminPage = currentURL.includes('admin');
+const readOnly = ifAdminPage;
+
 function CreateNewForm(props) {
   const [name, setName] = useState('');
   const [species, setSpecies] = useState('');
@@ -24,38 +28,40 @@ function CreateNewForm(props) {
   }
 
   return (
-    <form
-      className="p-3 bg-success bg-opacity-25 mb-5"
-      onSubmit={submitHandler}>
-      <div className="mb-2">
-        <input
-          ref={CreatePhotoField}
-          onChange={(e) => setFile(e.target.files[0])}
-          type="file"
-          className="form-control"
-        />
-      </div>
-      <div className="mb-2">
-        <input
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          type="text"
-          className="form-control"
-          placeholder="Animal name"
-        />
-      </div>
-      <div className="mb-2">
-        <input
-          onChange={(e) => setSpecies(e.target.value)}
-          value={species}
-          type="text"
-          className="form-control"
-          placeholder="Species"
-        />
-      </div>
+    readOnly && (
+      <form
+        className="p-3 bg-success bg-opacity-25 mb-5"
+        onSubmit={submitHandler}>
+        <div className="mb-2">
+          <input
+            ref={CreatePhotoField}
+            onChange={(e) => setFile(e.target.files[0])}
+            type="file"
+            className="form-control"
+          />
+        </div>
+        <div className="mb-2">
+          <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            type="text"
+            className="form-control"
+            placeholder="Animal name"
+          />
+        </div>
+        <div className="mb-2">
+          <input
+            onChange={(e) => setSpecies(e.target.value)}
+            value={species}
+            type="text"
+            className="form-control"
+            placeholder="Species"
+          />
+        </div>
 
-      <button className="btn btn-success">Create New Animal!</button>
-    </form>
+        <button className="btn btn-success">Create New Animal!</button>
+      </form>
+    )
   );
 }
 

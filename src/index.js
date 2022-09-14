@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import Axios from 'axios';
 import CreateNewForm from './components/CreateNewForm.js';
 import AnimalCard from './components/AnimalCard.js';
+import Navbar from './components/Navbar.js';
 
 const App = () => {
   const [animals, setAnimals] = useState([]);
@@ -17,10 +18,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <nav>
-        <a href="/">Home</a>
-        <a href="/admin">Admin</a>
-      </nav>
+      <Navbar />
       <CreateNewForm setAnimals={setAnimals} />
       <div className="animal-grid">
         {animals.map((animal) => {
